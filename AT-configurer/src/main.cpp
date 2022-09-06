@@ -1,13 +1,22 @@
 #include <Arduino.h>
 #include <SoftwareSerial.h>
 
+#define BAUD_RATE 38400
+
 SoftwareSerial bt(12,13);
 
+String SerialInput(String msg){
+  Serial.println(msg);
+  while(!Serial.available()){}
+  return Serial.readString();
+}
 
 void setup() {
-  // put your setup code here, to run once:
+  Serial.begin(9600);
+  bt.begin(BAUD_RATE);
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
+  String msg = SerialInput("Texto: ");
+  Serial.println(msg);
 }
